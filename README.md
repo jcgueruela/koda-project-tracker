@@ -47,21 +47,13 @@ You do **not** need PHP, Composer, or Node installed on your host machine — Sa
    cp .env.example .env
    ```
 
-   Defaults in `.env.example` are already wired for Sail's service names (`DB_HOST=pgsql` or `mysql`, `REDIS_HOST=redis`, etc.) — you shouldn't need to touch these for local dev. Confirm `DB_CONNECTION` matches whichever database service is defined in `docker-compose.yml`.
+   Defaults in `.env.example` are already wired for Sail's service names (`DB_HOST=pgsql` or `mysql`, `REDIS_HOST=redis`, etc.) — you shouldn't need to touch these for local dev.
 
 4. **Start the containers**
 
    ```bash
    ./vendor/bin/sail up -d
    ```
-
-   First run will pull/build images, so it can take a few minutes. Subsequent runs are fast.
-
-   > Tip: add an alias so you don't have to type the full path every time:
-   > ```bash
-   > alias sail='./vendor/bin/sail'
-   > ```
-   > (The rest of this README assumes you've done this — use `./vendor/bin/sail` instead if not.)
 
 5. **Generate the app key**
 
@@ -79,6 +71,7 @@ You do **not** need PHP, Composer, or Node installed on your host machine — Sa
 
    ```bash
    sail artisan migrate --seed
+   sail artisan migrate --seed --class=ProjectSeeder
    ```
 
 7. **Install JS dependencies and build frontend assets**
